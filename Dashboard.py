@@ -41,6 +41,8 @@ st.caption('Nota: La cercanía entre industrias y los centros de investigación 
 with open(p2,"rb") as f:
     base64_pdf = base64.b64encode(f.read()).decode('utf-8')
 
+st.markdown("En el siguiente archivo se muestran los detalles. Si tienen problemas en visualizarlo, prueba con Chrome o Firefox.")
+
 contenido = f"data:application/pdf;base64,{base64_pdf}"
 pdf_display = f'<iframe src={contenido} width="800" height="800" type="application/pdf"></iframe>'
 st.markdown(pdf_display, unsafe_allow_html=True)
