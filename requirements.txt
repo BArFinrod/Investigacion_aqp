@@ -1,5 +1,4 @@
-PyPDF2
-langchain
-tiktoken
 streamlit
 pandas
+numpy
+plotly
