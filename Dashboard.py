@@ -4,10 +4,19 @@ import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
 import base64
+from PIL import Image
+from pathlib import Path
+
+
+image = Image.open(Path(__file__).parent / 'Logo_blanco.jpeg')
+st.image(image, width=150)
 
 st.title("Potencial de vinculación entre los Centros de Investigación y las industrias de la región de Arequipa, Perú")
 
-with open("C:/Users/saico/OneDrive/Proyectos/News/Aqp innovación investigación/data_aqp_research_industries_embedding.pickle",'rb') as f:
+p1 = Path(__file__).parent / "data_aqp_research_industries_embedding.pickle"
+p2 = Path(__file__).parent / "Infografía investigación AQP centros.pdf"
+
+with open(p1,'rb') as f:
     dfciiu_aqp1 = pickle.load(f)
     dfcen = pickle.load(f)
     vis_dims = pickle.load( f)
@@ -29,7 +38,7 @@ fig1.update_layout(
 st.plotly_chart(fig1, use_container_width=True)
 st.caption('Nota: La cercanía entre industrias y los centros de investigación se calculó utilizando herramientas de inteligencia artificial y análisis semántico (Embedding de OpenAI). Se mide la distancia semántica entre los títulos de los proyectos de investigación de los centros y la descripción completa de las actividades económicas de las empresas. La representación visual se realiza con el algoritmo t-SNE.Fuentes: Se utiliza información actualizada a 2023 de los centros de investigación autorizados bajo la Ley 30309 y los datos de 2015 de la estructura empresarial en Arequipa bajo la clasificación CIIU rev. 3.' , unsafe_allow_html=True)
 
-with open("C:/Users/saico/OneDrive/Proyectos/News/Aqp innovación investigación/Infografía investigación AQP centros.pdf","rb") as f:
+with open(p2,"rb") as f:
     base64_pdf = base64.b64encode(f.read()).decode('utf-8')
 
 pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="800" height="800" type="application/pdf"></iframe>'
